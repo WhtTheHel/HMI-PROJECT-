@@ -1,0 +1,100 @@
+:root {
+    --wa-bg: #EFEFF4;
+    --wa-white: #FFFFFF;
+    --wa-green: #008069;
+    --wa-msg-out: #D9FDD3; /* Hijau muda iOS */
+    --wa-msg-in: #FFFFFF;
+    --text-primary: #000000;
+    --text-secondary: #8E8E93;
+    --border: #D1D1D6;
+    --header-height: 60px;
+}
+
+[data-theme="dark"] {
+    --wa-bg: #000000;
+    --wa-white: #1C1C1E;
+    --wa-green: #00A884;
+    --wa-msg-out: #005E4E;
+    --wa-msg-in: #2C2C2E;
+    --text-primary: #FFFFFF;
+    --text-secondary: #98989F;
+    --border: #38383A;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Inter', sans-serif; }
+body { background-color: var(--wa-bg); color: var(--text-primary); height: 100vh; overflow: hidden; }
+
+/* Utilities */
+.hidden { display: none !important; }
+.flex { display: flex; }
+.flex-col { flex-direction: column; }
+.btn-primary { background: var(--wa-green); color: white; border: none; padding: 10px 20px; border-radius: 20px; cursor: pointer; font-weight: 500; }
+.btn-secondary { background: transparent; border: 1px solid var(--wa-green); color: var(--wa-green); padding: 10px; border-radius: 20px; cursor: pointer; width: 100%; }
+
+/* Auth */
+#auth-container { height: 100vh; display: flex; align-items: center; justify-content: center; padding: 20px; }
+.auth-box { background: var(--wa-white); padding: 40px; border-radius: 12px; width: 100%; max-width: 400px; text-align: center; box-shadow: 0 4px 15px rgba(0,0,0,0.1); }
+.auth-box input { width: 100%; padding: 12px; margin: 10px 0; border: 1px solid var(--border); border-radius: 8px; background: var(--wa-bg); color: var(--text-primary); }
+.auth-divider { margin: 20px 0; color: var(--text-secondary); }
+
+/* App Layout */
+#app-container { display: flex; height: 100vh; }
+aside { width: 30%; min-width: 320px; background: var(--wa-white); border-right: 1px solid var(--border); display: flex; flex-direction: column; }
+main { flex: 1; background: var(--wa-bg); display: flex; flex-direction: column; position: relative; }
+
+/* Header */
+.app-header, .chat-header { height: var(--header-height); padding: 10px 15px; display: flex; align-items: center; background: var(--wa-green); color: white; }
+.chat-header { background: var(--wa-bg); color: var(--text-primary); border-bottom: 1px solid var(--border); }
+.header-info { flex: 1; margin-left: 10px; }
+.header-actions button { background: none; border: none; color: inherit; font-size: 1.2rem; margin-left: 15px; cursor: pointer; }
+.avatar { width: 40px; height: 40px; border-radius: 50%; object-fit: cover; background: #ccc; }
+
+/* Chat List */
+.search-bar { padding: 10px; background: var(--wa-white); }
+.search-bar input { width: 100%; padding: 8px; border-radius: 8px; border: 1px solid var(--border); background: var(--wa-bg); outline: none; }
+#chat-list { flex: 1; overflow-y: auto; }
+.chat-item { display: flex; padding: 12px; cursor: pointer; border-bottom: 1px solid var(--border); transition: background 0.2s; }
+.chat-item:hover { background: rgba(0,0,0,0.05); }
+.chat-item.active { background: rgba(0,128,105, 0.1); }
+.chat-meta { margin-left: 12px; flex: 1; }
+.chat-name { font-weight: 600; color: var(--text-primary); }
+.last-msg { font-size: 0.9rem; color: var(--text-secondary); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 200px; }
+
+/* Messages */
+#messages-container { flex: 1; overflow-y: auto; padding: 20px; background-image: url('https://user-images.githubusercontent.com/15075759/28719144-86dc0f70-73b1-11e7-911d-60d70fcded21.png'); background-blend-mode: overlay; }
+.msg-bubble { max-width: 65%; padding: 8px 12px; border-radius: 16px; margin-bottom: 8px; position: relative; font-size: 0.95rem; line-height: 1.4; word-wrap: break-word; animation: popIn 0.2s ease-out; }
+@keyframes popIn { from { opacity: 0; transform: scale(0.9); } to { opacity: 1; transform: scale(1); } }
+
+.msg-in { align-self: flex-start; background: var(--wa-msg-in); border-top-left-radius: 0; margin-right: auto; }
+.msg-out { align-self: flex-end; background: var(--wa-msg-out); border-top-right-radius: 0; margin-left: auto; }
+
+.msg-time { font-size: 0.7rem; color: var(--text-secondary); float: right; margin-top: 5px; margin-left: 8px; }
+.checkmark { color: #34B7F1; } /* Biru centang */
+
+/* Input Area */
+.chat-input-area { min-height: 60px; background: var(--wa-bg); padding: 10px; display: flex; align-items: center; border-top: 1px solid var(--border); }
+.input-wrapper { flex: 1; background: var(--wa-white); border-radius: 20px; padding: 8px 15px; margin: 0 10px; }
+.input-wrapper input { width: 100%; border: none; outline: none; background: transparent; font-size: 1rem; }
+.send-btn { background: var(--wa-green); color: white; width: 40px; height: 40px; border-radius: 50%; border: none; cursor: pointer; display: flex; align-items: center; justify-content: center; }
+.attach-btn { font-size: 1.5rem; cursor: pointer; color: var(--text-secondary); margin-right: 5px; }
+
+/* Modal & Components */
+.modal { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.6); z-index: 100; display: flex; align-items: center; justify-content: center; }
+.modal-content { background: var(--wa-white); padding: 20px; border-radius: 12px; width: 90%; max-width: 400px; text-align: center; }
+.modal-content img { max-width: 100%; max-height: 300px; border-radius: 8px; margin-bottom: 10px; }
+.modal-content textarea { width: 100%; padding: 10px; border-radius: 8px; border: 1px solid var(--border); margin-bottom: 10px; }
+
+.reply-preview { background: #E9E9EB; padding: 8px 15px; display: flex; justify-content: space-between; align-items: center; font-size: 0.8rem; }
+.empty-state { display: flex; flex-direction: column; align-items: center; justify-content: center; height: 100%; color: var(--text-secondary); }
+
+/* Responsive */
+@media (max-width: 768px) {
+    #app-container { flex-direction: column; }
+    aside { width: 100%; height: 100%; position: absolute; z-index: 10; transition: transform 0.3s; }
+    main { width: 100%; height: 100%; position: absolute; z-index: 20; transform: translateX(100%); transition: transform 0.3s; }
+    main.active { transform: translateX(0); }
+    .mobile-back-btn { display: block; margin-right: 10px; font-size: 1.2rem; }
+}
+@media (min-width: 769px) {
+    .mobile-back-btn { display: none; }
+}
