@@ -1,11 +1,12 @@
 // public/firebase.js
 const firebaseConfig = {
-    apiKey: "ISI_API_KEY_ANDA_DISINI",
-    authDomain: "PROJECT_ID.firebaseapp.com",
-    projectId: "PROJECT_ID",
-    storageBucket: "PROJECT_ID.appspot.com",
-    messagingSenderId: "SENDER_ID",
-    appId: "APP_ID"
+   apiKey: "AIzaSyA_SW13O3EPp6L6TGT3UV5B2ADzwCV_Owo",
+  authDomain: "hmi-app-ac76d.firebaseapp.com",
+  projectId: "hmi-app-ac76d",
+  storageBucket: "hmi-app-ac76d.firebasestorage.app",
+  messagingSenderId: "985813799742",
+  appId: "1:985813799742:web:a93704abe1427e6aeb126f",
+  measurementId: "G-L3L2FGWRYK"
 };
 
 // Initialize Firebase (Imported via CDN in HTML)
