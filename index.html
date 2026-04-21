@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>OrgConnect - Internal Chat</title>
+    <!-- Font Inter (Mirip San Francisco) -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <!-- Firebase SDK (Compat version for simplicity in vanilla JS) -->
+    <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-auth-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-firestore-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-storage-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-messaging-compat.js"></script>
+    
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <!-- LOGIN SCREEN -->
+    <div id="auth-container">
+        <div class="auth-box">
+            <div class="logo-icon">💼</div>
+            <h2>OrgConnect</h2>
+            <p>Masuk ke internal organisasi</p>
+            
+            <form id="login-form">
+                <input type="email" id="email" placeholder="Email Address" required>
+                <input type="password" id="password" placeholder="Password" required>
+                <button type="submit" class="btn-primary">Login</button>
+            </form>
+            
+            <div class="auth-divider">ATAU</div>
+            <button id="google-login" class="btn-secondary">Masuk dengan Google</button>
+            <p>Belum punya akun? <a href="#" id="toggle-auth">Daftar sekarang</a></p>
+        </div>
+    </div>
+
+    <!-- MAIN APP SCREEN -->
+    <div id="app-container" class="hidden">
+        <!-- Sidebar (List Chat) -->
+        <aside id="sidebar">
+            <header class="app-header">
+                <img id="my-avatar" src="" class="avatar">
+                <div class="header-info">
+                    <h3 id="my-name">Nama User</h3>
+                    <span class="status-text" id="connection-status">Online</span>
+                </div>
+                <div class="header-actions">
+                    <button id="theme-toggle" title="Dark Mode">🌙</button>
+                    <button id="logout-btn" title="Logout">🚪</button>
+                </div>
+            </header>
+            
+            <div class="search-bar">
+                <input type="text" placeholder="Cari chat..." id="search-input">
+            </div>
+
+            <div id="chat-list">
+                <!-- Chat items will be injected here -->
+                <div class="loading-spinner">Loading...</div>
+            </div>
+            
+            <!-- Admin Only -->
+            <button id="create-group-btn" class="floating-action">+</button>
+        </aside>
+
+        <!-- Chat Area -->
+        <main id="chat-area">
+            <!-- Placeholder when no chat selected -->
+            <div id="empty-state" class="empty-state">
+                <div class="logo-icon">💬</div>
+                <h3>OrgConnect Web</h3>
+                <p>Kirim dan terima pesan dengan organisasi.</p>
+                <p><i>Enkripsi end-to-end</i></p>
+            </div>
+
+            <!-- Active Chat View -->
+            <div id="active-chat" class="hidden">
+                <header class="chat-header">
+                    <button class="mobile-back-btn">←</button>
+                    <img id="chat-avatar" src="" class="avatar">
+                    <div class="header-info">
+                        <h3 id="chat-name">Nama Chat</h3>
+                        <span class="status-text" id="chat-status">Online</span>
+                    </div>
+                    <div class="header-actions">
+                        <button>⋮</button>
+                    </div>
+                </header>
+
+                <div id="messages-container">
+                    <!-- Messages bubbles -->
+                </div>
+
+                <!-- Reply Preview -->
+                <div id="reply-preview" class="reply-preview hidden">
+                    <div class="reply-content">
+                        <span id="reply-to-name">Nama</span>
+                        <span id="reply-text">Pesan...</span>
+                    </div>
+                    <button id="cancel-reply">✕</button>
+                </div>
+
+                <footer class="chat-input-area">
+                    <label for="file-upload" class="attach-btn">📎</label>
+                    <input type="file" id="file-upload" hidden>
+                    
+                    <div class="input-wrapper">
+                        <input type="text" id="message-input" placeholder="Ketik pesan..." autocomplete="off">
+                    </div>
+                    
+                    <button id="send-btn" class="send-btn">➤</button>
+                </footer>
+            </div>
+        </main>
+    </div>
+
+    <!-- Image Preview Modal -->
+    <div id="image-modal" class="modal hidden">
+        <div class="modal-content">
+            <h3>Kirim Gambar</h3>
+            <img id="preview-img" src="" alt="Preview">
+            <textarea id="caption-input" placeholder="Tambahkan caption..."></textarea>
+            <div class="modal-actions">
+                <button id="cancel-upload">Batal</button>
+                <button id="confirm-upload" class="btn-primary">Kirim</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="firebase.js"></script>
+    <script src="app.js"></script>
+</body>
+</html>
